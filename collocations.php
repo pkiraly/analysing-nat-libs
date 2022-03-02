@@ -1,10 +1,14 @@
 <?php
 
-// uva
-$catalogues = [ // 'bayern', 'uva'
-  'bnpl', 'bayern', 'ddb', 'loc', 'nfi', 'onb', 'uva', 'libris'
+$catalogues = [
+  'bnpl', 'bayern', 'ddb', 'dnb', 'kbr', 'libris', 'lnb', 'loc', 'mek', 'nfi', 'onb', 'uva', 'K10plus'
 ];
-$fields = ['leader07_bibliographicLevel_ss', 'leader06_typeOfRecord_ss'];
+
+$fields = [];
+$fields[] = $argv[1];
+$fields[] = $argv[2];
+
+// $fields = ['leader07_bibliographicLevel_ss', 'leader06_typeOfRecord_ss'];
 // leader05_recordStatus_ss
 // leader06_typeOfRecord_ss
 // leader07_bibliographicLevel_ss
