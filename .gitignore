@@ -1,0 +1,11 @@
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+control-fields/data_raw/*.csv
+control-fields/img/*.jpg
+place-names/data_raw/*.csv
+place-names/data/*.csv
+place-names/img/*.jpg
+place-names/img/*.gif
+place-names/img/*.png
