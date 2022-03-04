@@ -15,7 +15,7 @@ php collocations.php leader07_bibliographicLevel_ss leader17_encodingLevel_ss > 
 echo "4/12) LEADER 06 versus 007/00"
 php collocations.php leader06_typeOfRecord_ss 007common00_PhysicalDescription_categoryOfMaterial_ss > $OUTPUT/ldr06-00700.csv
 echo "5/12) LEADER 07 versus 007/00"
-php collocations.php leader06_typeOfRecord_ss 007common00_PhysicalDescription_categoryOfMaterial_ss > $OUTPUT/ldr07-00700.csv
+php collocations.php leader07_bibliographicLevel_ss 007common00_PhysicalDescription_categoryOfMaterial_ss > $OUTPUT/ldr07-00700.csv
 echo "6/12) LEADER 17 versus 007/00"
 php collocations.php leader17_encodingLevel_ss 007common00_PhysicalDescription_categoryOfMaterial_ss > $OUTPUT/ldr17-00700.csv
 
