@@ -1,4 +1,5 @@
 <?php
+define('LN', "\n");
 
 $catalogues = [
   'bnpl', 'bayern', 'ddb', 'dnb', 'kbr', 'libris', 'lnb', 'loc', 'mek', 'nfi', 'onb', 'uva', 'K10plus'
@@ -36,8 +37,7 @@ function collocateFields($catalogue, $fields, $id) {
   $params = 'q=' . urlencode(join(' AND ', $q)) . '&start=0&rows=0&wt=json&q.op=AND&json.nl=map';
 
   $response = search($catalogue, $params);
-  echo str_putcsv()
-  print_r($id,$catalogue,$response->numFound);
+  echo str_putcsv($id,$catalogue,$response->numFound), LN;
 }
 
 function search($catalogue, $params) {
