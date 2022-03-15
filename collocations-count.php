@@ -15,18 +15,19 @@ $id = $argv[3];
 // leader07_bibliographicLevel_ss
 // 040d_AdminMetadata_modifyingAgency_ss
 
-collocateCatalogues($catalogues, $fields);
+collocateCatalogues($catalogues, $fields, $id);
 
 /// functions
 
-function collocateCatalogues($catalogues, $fields) {
-  echo str_putcsv(['catalogue', $fields[0], $fields[1], 'count']), "\n";
+function collocateCatalogues($catalogues, $fields, $id) {
+  echo str_putcsv(['id', 'catalogue', 'count']), "\n";
   foreach ($catalogues as $catalogue) {
-  	collocateFields($catalogue, $fields);
+  	collocateFields($catalogue, $fields, $id);
   }
 }
 
-function collocateFields($catalogue, $fields) {
+function collocateFields($catalogue, $fields, $id) {
+
   $q = [];
   foreach ($fields as $field) {
     $q[] = sprintf('%s:*', $field, '*');
@@ -35,17 +36,8 @@ function collocateFields($catalogue, $fields) {
   $params = 'q=' . urlencode(join(' AND ', $q)) . '&start=0&rows=0&wt=json&q.op=AND&json.nl=map';
 
   $response = search($catalogue, $params);
-  print_r($response->numFound);
-
-  /*
-  $f1_values = $response->facets->{$fields[0]};
-  foreach ($f1_values as $value1 => $count1) {
-    $response = search($catalogue, $params . '&fq=' . $fields[0] . ':' . urlencode('"' . $value1 . '"'));
-    foreach ($response->facets->{$fields[1]} as $value2 => $count2) {
-      echo str_putcsv([$catalogue, $value1, $value2, $count2]), "\n";
-    }
-  }
-  */
+  echo str_putcsv()
+  print_r($id,$catalogue,$response->numFound);
 }
 
 function search($catalogue, $params) {
