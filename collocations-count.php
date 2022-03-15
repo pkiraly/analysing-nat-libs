@@ -39,7 +39,8 @@ function collocateFields($catalogue, $fields, $id) {
   $params = 'q=' . urlencode(join(' AND ', $q)) . '&start=0&rows=0&wt=json&q.op=AND&json.nl=map';
 
   $response = search($catalogue, $params);
-  echo str_putcsv([$id,$catalogue,$response->numFound, $total * 100 / $response->numFound]), LN;
+  $percentage = $response->numFound == 0 ? 0 : ($total * 100 / $response->numFound);
+  echo str_putcsv([$id, $catalogue, $response->numFound, $percentage]), LN;
 }
 
 function search($catalogue, $params) {
