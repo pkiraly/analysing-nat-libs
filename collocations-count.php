@@ -29,10 +29,10 @@ function collocateCatalogues($catalogues, $fields) {
 function collocateFields($catalogue, $fields) {
   $q = [];
   foreach ($fields as $field) {
-    $q[] = sprintf('%s:%s', $field, urlencode('*'));
+    $q[] = sprintf('%s:*', $field, '*');
   }
 
-  $params = 'q=' . join(' AND ', $q) . '&start=0&rows=0&wt=json&q.op=AND&json.nl=map';
+  $params = 'q=' . urlencode(join(' AND ', $q)) . '&start=0&rows=0&wt=json&q.op=AND&json.nl=map';
 
   $response = search($catalogue, $params);
   print_r($response);
