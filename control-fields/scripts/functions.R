@@ -5,6 +5,10 @@ if (!("tidyverse" %in% (.packages()))) {
 runAll <- function(.prefix, codeA, codeB) {
   # source('control-fields/scripts/codes.R')
   
+  collocations_count <- counts %>% 
+    filter(id == .prefix) %>% 
+    select(catalogue, count)
+  
   params <- comparisions %>% filter(prefix == .prefix)
   a <- params$a
   b <- params$b
@@ -74,6 +78,20 @@ runAll <- function(.prefix, codeA, codeB) {
   #languages <- c('english', 'hungarian')
   languages <- c('hungarian')
   for (language in languages) {
+    lib2 <- libraries %>% 
+      filter(is_national == TRUE) %>% 
+      left_join(collocations_count, by = c('catalogue' = 'catalogue')) %>% 
+      select(language, count) %>% 
+      rename(coll_count = count) %>%
+      rename(l = language) %>%
+      mutate(title = sprintf("%s\n%s rekord", l, 
+                             str_replace(
+                               str_replace(scales::label_comma()(coll_count), '\\.0$', ''),
+                               ',', ' '
+                             )))
+
+    titles <- lib2$title
+
     imgParams <- setLanguage(df_normalized, language, fieldA, fieldB)
     imgParams$max_count <- max_count
 
@@ -94,6 +112,13 @@ runAll <- function(.prefix, codeA, codeB) {
       }
       imgParams$df$library <- factor(imgParams$df$library, levels=.levels)
     }
+    
+    imgParams$df <- imgParams$df %>% 
+      left_join(lib2, by = c('library' = 'l')) %>%
+      select(-c(library, coll_count))
+    imgParams$df$title <- factor(imgParams$df$title, levels=titles)
+
+    # collocations_count
     
     yVals_fct <- imgParams$df %>% select(y) %>% distinct() %>% unlist(use.names = FALSE)
     yVals <- as.character(yVals_fct)
@@ -175,6 +200,6 @@ createImage <- function(params) {
     ) +
     scale_size(range = c(0, 6), breaks=seq(0, params$max_count, 100)) +
     scale_x_discrete(position = "top") +
-    facet_wrap(vars(library))
+    facet_wrap(vars(title))
   return(g)
 }

@@ -28,6 +28,8 @@ function collocateCatalogues($catalogues, $fields, $id) {
 }
 
 function collocateFields($catalogue, $fields, $id) {
+  $response = search($catalogue, 'q='.urlencode('*:*').'&start=0&rows=0&wt=json&q.op=AND&json.nl=map');
+  $total = $response->numFound;
 
   $q = [];
   foreach ($fields as $field) {
@@ -37,7 +39,7 @@ function collocateFields($catalogue, $fields, $id) {
   $params = 'q=' . urlencode(join(' AND ', $q)) . '&start=0&rows=0&wt=json&q.op=AND&json.nl=map';
 
   $response = search($catalogue, $params);
-  echo str_putcsv([$id,$catalogue,$response->numFound]), LN;
+  echo str_putcsv([$id,$catalogue,$response->numFound, $total * 100 / $response->numFound]), LN;
 }
 
 function search($catalogue, $params) {

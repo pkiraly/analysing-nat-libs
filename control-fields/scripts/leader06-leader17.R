@@ -1,6 +1,7 @@
 library(tidyverse)
 library(grid)
 
+counts <- read_csv('control-fields/data_raw/counts.csv')
 source('control-fields/scripts/codes.R')
 libs <- libraries %>% filter(is_national == TRUE) %>% 
   select(catalogue) %>% unlist(use.names = FALSE)
