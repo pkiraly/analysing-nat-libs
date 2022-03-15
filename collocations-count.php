@@ -35,7 +35,7 @@ function collocateFields($catalogue, $fields) {
   $params = 'q=' . urlencode(join(' AND ', $q)) . '&start=0&rows=0&wt=json&q.op=AND&json.nl=map';
 
   $response = search($catalogue, $params);
-  print_r($response);
+  print_r($response->numFound);
 
   /*
   $f1_values = $response->facets->{$fields[0]};
