@@ -40,7 +40,7 @@ normalizePlaceNames <- function(prefix) {
     mutate(term2 = str_replace(term2, "^(Imprinted at |Imprimé à |Imprim. à |Gedruckt (te|in|ter|zur) |Impressvm et finitvm |Impressum |Impressvm |Reimpressvm |Impressa |Reimpressa |Typis impressa |Imprimé à |Réimprimé à |Sur l'imprimé à |Imprimé a |Recvsa |Recusa |Excussum |Excvsvm |Excvsae |Excvsa |Excvssvm |Excusa |Impr\\. |Exc\\. |Impressus |Imprimebatur |Imprimebat |Impresso em |Impresso en |Impresse |Impresa en |Impressae uero |Impr\\[e\\]ssum |Impresso in )", '')) %>%
     mutate(term2 = str_replace(term2, " (impressit|impressum|impressa|prändätty|recusa)$", '')) %>%
     
-    mutate(term2 = str_replace(term2, "^(S\\.l\\.?|S.L.|s\\.l\\.|Place of publication not identified|Miejsce nieznane.*|miejsce nieznane|Miejsce niezane|Kustannuspaikka tuntematon|S. l|S\\.I\\.)$", 'S. l.')) %>%
+    mutate(term2 = str_replace(term2, "^(S\\.l\\.?|S.L.|s\\.l\\.|Place of publication not identified|Miejsce nieznane.*|miejsce nieznane|Miejsce niezane|Kustannuspaikka tuntematon|S. l|S\\.I\\.|s. l.)$", 'S. l.')) %>%
     mutate(term2 = str_replace(term2, "^et se trouve (a|à) ", '')) %>%
     mutate(term2 = str_replace(term2, "^Verteutscht und gedruckt zu ", '')) %>%
     mutate(term2 = str_replace(term2, "^(Prostant|Venundantur|Veneunt) ", '')) %>%
@@ -136,7 +136,7 @@ normalizePlaceNames <- function(prefix) {
   
   print('replace 2')
 
-  synonyms <- read_csv('place-synonyms-normalized.csv', show_col_types = FALSE)
+  synonyms <- read_csv('data_internal/place-synonyms-normalized.csv', show_col_types = FALSE)
 
   df_name2 <- df_cities %>%
    left_join(synonyms, by = c('term2' = 'original')) %>% 
