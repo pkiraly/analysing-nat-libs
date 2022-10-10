@@ -527,8 +527,6 @@ Carbondale, IL=Carbondale
 Debrecen=Debretin|Debreczen|Debreczini|Debrecini|Debreczenben|Debreczenbenn|Debrezen
 Marosvásárhely=Marasvásárhely [Târgu Mureș]|Marosváráhely [Târgu-Mureș]|Marosvásáehely [Târgu Mureș]|Marosvásárhel|Marosvásarhely [Târgu Mureș]|Marosvásarhély [Târgu Mureș]|Marosvásárhely [Târgu Mureș]|Marosvasarhely [Târgu-Mureș]|Marosvásarhely [Târgu-Mureș]|Marosvásarhély [Târgu-Mureș]|Marosvásárhely [Târgu-Mureș]|Marosvásárhely [Tg. Mureș]|Marosvásárhelyi [Târgu Mureș]|Marosvásárhelyi [Târgu-Mureș]|Marosvásáthely [Târgu-Mureș]|Márosvasarhély [Târgu-Mureș]|Márosvásárhely [Târgu-Mureș]|Masorvásárhely [Târgu-Mureș]|Tărgu Mureș|Târgu-Mureș|Tg. Mureș|Târgu Mureș|Márosvásárhely
 Kolozsvár=Kolosvár [Cluj-Napoca]|Koloszvár|Koloszvár (Cluj-Napoca)|Koloszvár [Cluj- Napoca]|Koloszvár [Cluj-Napoca]|Kolozsár|Kolozsár [Cluj-Napoca]|Kolozsvar|Kolozsvár [Cluj Napoca]|Kolozsvár [Cluj- Napoca]|Kolozsvár [Cluj-Napoca|Kolozsvar [Cluj-Napoca]|Kolozsvár [Cluj-Napoca]|Kolozsvár [Cluj]|Kolozsvár] Cluj-Napoca|Kolozvár|Kolozvár [Cluj Napoca]|Kolozvár [Cluj-Napoca]|Cluj-Napoca|KluÄµo [Cluj-Napoca]|Lolosvár [Cluj-Napoca]|Cluj-Napoca|Cluj|Claudiopoli|Claudiopolis|Claudopoli|Kolozsvartt|Kolozvar|Clausenburg
-# multi
-Kolozsvár=Kolozsvar es Szeben
 Sepsiszentgyörgy=Sfântu Gheorghe|Sepsiszentgyörgy [Sfântu Gheorghe]|Sepsiszentgyörgy [Sfântu-Gheorghe]|Sepsisizentgyörgy [Sfântu Gheorghe]|Sepsiszentgörgy [Sfântu-Gheorghe]|SepsiszentgyÃrgy [Sfântu Gheorghe]|Sepsiszentgyörgyi [Sfântu-Gheorghe]|Sepiszentgyörgy [Sfântu Gheorghe]|Sepsiszentgörgy [Sfântu Gheorghe]|Sepsiszentgyörgy [Sf. Gheorghe]|Sepsiszentgyörgy [Sf.Gheorghe]|Sepsiszentgyörgy [Sfântul-Gheorghe]|Sepsiszentgyorgyi [Sfântu-Gheorghe]|Sepsizentgyörgy [Sfântu Gheorghe]|Sepsi-Szentgyörgy|Sepsiszentgörgy|Sepsiszentgőrgy|Sepsiszentgyörgy [Sfântu-Gheroghe]|Sfântul Gheorghe
 Csíkszereda=Csíkszereda [Miercurea Ciuc]|Miercurea Ciuc|Csíkszereda [Miercurea-Ciuc]|Csikszereda [Miercurea-Ciuc]|Csiíkszereda [Miercurea Ciuc]|Csíksereda [Miercurea-Ciuc]|Csíksereda [Miercurea Ciuc]|Csikszereda [Miercurea Ciuc]|Csíkszereda [Mircurea-Ciuc]|Csíksszereda [Miercurea Ciuc]|Csíkszeredu [Miercurea Ciuc]|Csíszereda [Miercurea Ciuc]|Ksíkszereda [Miercurea-Ciuc]|Miercurea-Ciuc|Csikszereda|Csinszereda
 Brassó=Brașov|Brassó [Brașov]
@@ -584,15 +582,16 @@ Vác=Vátzon
 Nagykároly=Magno-Karolini|Nagy-Karoly
 Nagyszeben=Nagyszehen|Hermannstadt|[Hermannstadt]|[S.l. Hermannstadt]|Hermannipoli|Cibinii|[Cibinii]|Cibinii Transilvaniae|Cibinii, In Transiluania|N. Szebenben|Szebenben|Herrmannstadt|Herrmann-Stadt
 # multi
-Nagyszeben=Cibinii et Claudiopoli
+Nagyszeben|Kolozsvár=Cibinii et Claudiopoli|Kolozsvar es Szeben
 Eger=Agriae|Agriæ|Egerben
 Szombathely=Szombathelyen
 Sopron=Sopronii|Sopronban|Sopronii, Oedenburg|Sopronyb|Oedenburg|Ödenburg|Oedenburgo|[Ödenburg]|Frankofurtumban [i.e. Ödenburg]|Oedenburg gedruckt
 Kassa=Kassan|Kaschau|Kassán|[Kaschau]|Kaschau in Ober-Hungarn [Košice]|Cassoviae|Cassoviæ|Cassovia|Caschau
 # multi
-Kassa=Posonii & Cassoviae|Posonii Et Cassoviae|Pestini, Budae et Cassoviae|Pestini, Budae, Cassoviae|Pestini, Bvdae et Cassoviae
+Pozsony|Kassa=Posonii & Cassoviae|Posonii Et Cassoviae
+Pest|Buda|Kassa=Pestini, Budae et Cassoviae|Pestini, Budae, Cassoviae|Pestini, Bvdae et Cassoviae
 Selmecbánya=[Schemnitz]|Schemnitz|Cheminitii|Chemnicii|Chemnitii
 # multi
-Selmecbánya=Chemnitii et Lipsiae
+Selmecbánya|Leipzig=Chemnitii et Lipsiae
 Komárom=Comaromii|Komarom|Komáromban
 Levoča=Leutschoviae|Leutschoviæ|Leutschoviae [Leutschau]|Levtschoviae
