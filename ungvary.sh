@@ -33,4 +33,7 @@ php collocations.php 007text01_PhysicalDescription_specificMaterialDesignation_s
 echo "12/12) 007 00 t 01 versus 008 33"
 php collocations.php 007text01_PhysicalDescription_specificMaterialDesignation_ss 008book33_GeneralInformation_literaryForm_ss > $OUTPUT/007text01material-008book33lit.csv
 
+echo "13/13) térkép, 007/01=a 01 versus térkép, fizikai hordozó, 007/04"
+php collocations.php 007map01_PhysicalDescription_specificMaterialDesignation_ss 007map04_PhysicalDescription_physicalMedium_ss > $OUTPUT/007map01material-007map04medium.csv
+
 echo DONE

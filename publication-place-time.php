@@ -13,6 +13,9 @@ $fields = [
   '260a_Publication_place_ss',
 ];
 
+if ($catalogue == 'onb')
+  $fields[1] = '264a_ProvisionActivity_place_ss';
+
 $filters = [
   'type_ss:%22Books%22',
   'leader06_typeOfRecord_ss:%22Language%20material%22'
