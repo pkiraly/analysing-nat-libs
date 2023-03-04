@@ -31,8 +31,8 @@ interestingPaths <- c(
 
 df <- tibble(path = '0', 'number-of-record' = 0, catalog = 'dummy')
 
-for (name in names) {
-  df <- union(df, readCatalogue(name))
+for (i in 1:length(names)) {
+  df <- union(df, readCatalogue(names[i]))
 }
 
 df <- df %>% filter(catalog != 'dummy')
