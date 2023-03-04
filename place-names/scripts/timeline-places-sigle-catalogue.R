@@ -1,30 +1,52 @@
 library(tidyverse)
+library(phonics)
 setwd('~/git/analysing-nat-libs/place-names')
 
 # source("scripts/normalizePlaceNames.R") 
 # normalizePlaceNames('onb')
 
-df <- read_csv('data_raw/onb-place-time.csv')
+name <- 'knihoveda' # onb, oszk, bnpl, knihoveda
+# df <- read_csv('data_raw/nkp-place-time.csv')
+# df <- read_csv('data_raw/onb-place-time.csv')
+df <- read_csv(sprintf('data_raw/%s-place-time.csv', name))
 nrow(df)
 
+df %>% view()
+
 df2 <- df %>% 
+  filter(!is.na(date)) %>% 
+  mutate(date = str_replace_all(date, '[\\?u]', '0')) %>% 
   filter(grepl('^\\d+$', date)) %>% 
+  
+  mutate(term = str_replace(term, " :$", '')) %>% 
   mutate(term = str_replace(term, " (\\[u\\.a\\.\\]|usw\\.)$", '')) %>% 
   mutate(term = str_replace(
     term, 
     "^(S\\.l\\.?|S.L.|s\\.l\\.|o.O.|\\[S.l.\\]|\\[O.O.\\]|S. l|S\\.I\\.|s. l.|O. O.|	
-\\[s\\.l\\.\\])$", 'S. l.'
+\\[s\\.l\\.\\]|\\[S\\.I\\.\\])$", 'S. l.'
   )) %>% 
-  mutate(term = ifelse(term %in% c('[s.l.]', '[S. l.]', '[Ohne Ort]'), 'S. l.', term)) %>% 
+  mutate(term = ifelse(term %in% c(
+    '[s.l.]', '[S. l.]', '[Ohne Ort]', '[S .l.]', '[S. I.]',
+    '[s.l.', '[S.l. ]', '[s.l.].', '[S.l[', '[sine loco', '[S.l.', '[S. l.',
+    '[Miejsce nieznane]', '[Miejsce nieznane', '[miejsce nieznane',
+    '[Miejsce nieznane:', '[Miejsce nieznane],', '[Miejsce niezanane',
+    '[Miejsce nieznane]:', '[Miejsce nieznane,', '[miejsce nieznane]',
+    '[Miejsce niezanane]'
+    ), 
+    'S. l.', term)) %>% 
   mutate(term = str_replace(term, "^Gedruckt zu ", '')) %>% 
   filter(term != 'S. l.') %>% 
   mutate(date = as.integer(date)) %>% 
   filter(date >= 1700 & date <= 1800)
 
+# view(df2)
 nrow(df2)
 df2 %>% filter(grepl(' et ', term)) %>% arrange(date)
 
-cities_in_onb <- df2 %>% group_by(term) %>% summarise(n = sum(count))
+cities_in_onb <- df2 %>% 
+  group_by(term) %>% 
+  summarise(n = sum(count))
+# cities_in_onb %>% view()
 names(cities_in_onb) # term, n
 n_total <- sum(cities_in_onb$n)
 print(n_total)
@@ -34,7 +56,7 @@ coord <- coord %>% mutate(
   lat = as.double(lat),
   long = as.double(long)
 )
-coord %>% view()
+# coord %>% view()
 
 runIt <- function() {
   coord <- read_csv('data_internal/coord.csv')
@@ -47,15 +69,24 @@ runIt <- function() {
   cities_in_onb2 <- cities_in_onb %>%
     left_join(synonyms, by = c('term' = 'original')) %>% 
     mutate(normalized = ifelse(is.na(normalized), term, normalized))
-  
+
   unknown_cities <- cities_in_onb2 %>% 
     left_join(coord, by = c('normalized' = 'city'))  %>% 
     filter(is.na(geoid))
 
   n_unknown <- sum(unknown_cities$n)
-  print(n_unknown / n_total)
+  print(sprintf("books - total: %d, with unknown location: %d (%.3f%%)",
+         n_total, n_unknown, (n_unknown * 100 / n_total)))
+
+  # unknown_cities %>% 
+  #   filter(term == normalized) %>% 
+  #   arrange(desc(n)) %>% 
+  #   view()
 
   unknown_cities %>% 
+    filter(term == normalized) %>% 
+    select(term, n) %>% 
+    mutate(soundex = soundex(term)) %>% 
     arrange(desc(n)) %>% 
     view()
 }
@@ -65,13 +96,18 @@ synonyms <- read_csv('data_internal/place-synonyms-normalized.csv', show_col_typ
 
 cities_in_onb2 <- cities_in_onb %>%
   left_join(synonyms, by = c('term' = 'original')) %>% 
-  mutate(normalized = ifelse(is.na(normalized), term, normalized))
+  mutate(
+    normalized = ifelse(is.na(normalized), term, normalized),
+    factor = ifelse(is.na(factor), 1.0, factor)
+  )
+
+# cities_in_onb2 %>% view()
 
 known_cities <- cities_in_onb2 %>% 
   left_join(coord, by = c('normalized' = 'city')) %>% 
   filter(!is.na(geoid))
 
-known_cities
+# known_cities %>% view()
 
 no_countries <- c('Iraq', 'China', 'United States',
 'Egypt', 'India', 'Sri Lanka', 'Nicaragua', 'Israel', 'Japan', 'Peru',
@@ -83,9 +119,28 @@ good_cities %>% select(country) %>% distinct() %>% unlist(use.names = FALSE)
 
 df3 <- df2 %>% 
   left_join(good_cities, by = c('term' = 'term')) %>% 
-  filter(!is.na(geoid))
+  filter(!is.na(geoid)) %>% 
+  mutate(weighted_count = count * factor) %>% 
+  select(-c(n, factor, count)) %>% 
+  rename(count = weighted_count)
 
-df3
+# df3 %>% view()
+
+df_variants <- df3 %>% 
+  select(date, normalized, term) %>% 
+  group_by(date, normalized) %>% 
+  summarise(variants = paste(term, collapse = '|'))
+
+df3 %>%
+  select(normalized, geoid, date, count, country, lat, long) %>% 
+  group_by(normalized, country, geoid, lat, long, date) %>% 
+  summarise(n = sum(count), .groups = "keep") %>% 
+  ungroup() %>% 
+  left_join(df_variants, by = c("date" = "date", "normalized" = "normalized")) %>% 
+  rename(city = normalized, id = geoid) %>% 
+  write_csv(sprintf('data/%s-place-time-normalized.csv', name))
+
+#########
 
 map.europe <- map_data("world")
 min(good_cities$long)
@@ -97,6 +152,10 @@ maxy <- max(good_cities$lat)
 print(paste(minx, maxx, miny, maxy))
 step <- 1
 years = seq(1700, 1800, step)
+dir <- paste0('img/', name)
+if (!dir.exists(dir)) {
+  dir.create(dir)
+}
 for (i in years) {
   j <- i + step - 1
   title <- ifelse(i == j, paste0(i), paste0(i, '-', j))
@@ -150,7 +209,7 @@ for (i in years) {
       axis.text = element_blank(),
     )
   
-  ggsave(paste0('img/onb/onb-', title, '.jpg'), 
+  ggsave(paste0(dir, '/', name, '-', title, '.jpg'), 
          width = 5.5, height = 4, units = 'in', dpi = 300)
 }
 
@@ -167,7 +226,7 @@ places
 
 df3 %>% 
   left_join(top20, by = c('normalized' = 'normalized')) %>% 
-  filter(!is.na(n.y)) %>% 
+  filter(!is.na(n)) %>% 
   select(normalized, date, count) %>% 
   ggplot(aes(x = date, y = factor(normalized, levels = rev(places)))) +
   geom_point(aes(color = count)) +
@@ -189,9 +248,14 @@ top5 <- df3 %>%
   head(topN)
 top5
 
+joined <- df3 %>% 
+  left_join(top5, by = c('normalized' = 'normalized'))
+
+joined %>% view()
+
 df4 <- df3 %>% 
   left_join(top5, by = c('normalized' = 'normalized')) %>% 
-  filter(!is.na(n.y)) %>% 
+  filter(!is.na(n)) %>% 
   select(normalized, date, count) %>% 
   group_by(normalized, date) %>% 
   summarise(n = sum(count), .groups = 'keep') %>% 
