@@ -1,7 +1,7 @@
 <?php
 
 $catalogues = [
-  'bnpl', 'bayern', 'ddb', 'dnb', 'kbr', 'libris', 'lnb', 'loc', 'mek', 'nfi', 'onb', 'uva', 'K10plus'
+  'bnpl', 'bayern', 'ddb', 'dnb', 'kbr', 'libris', 'lnb', 'loc', 'mek', 'nfi', 'onb', 'uva', 'K10plus', 'nli', 'firenze'
 ];
 
 $fields = [];

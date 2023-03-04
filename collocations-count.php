@@ -1,14 +1,17 @@
 <?php
 define('LN', "\n");
 
+$catalogue = $argv[1];
+
 $catalogues = [
-  'bnpl', 'bayern', 'ddb', 'dnb', 'kbr', 'libris', 'lnb', 'loc', 'mek', 'nfi', 'onb', 'uva', 'K10plus'
+  'bnpl', 'bayern', 'ddb', 'dnb', 'kbr', 'libris', 'lnb', 'loc', 'mek', 'nfi', 'onb', 'uva', 'K10plus', 'nli', 'firenze',
+  'bl', 'nkp', 'kb'
 ];
 
 $fields = [];
-$fields[] = $argv[1];
 $fields[] = $argv[2];
-$id = $argv[3];
+$fields[] = $argv[3];
+$id = $argv[4];
 
 // $fields = ['leader07_bibliographicLevel_ss', 'leader06_typeOfRecord_ss'];
 // leader05_recordStatus_ss
