@@ -26,5 +26,7 @@ echo "11/12) 007 00 t 01 versus 008 24-27"
 php collocations-count.php 007text01_PhysicalDescription_specificMaterialDesignation_ss 008book24_GeneralInformation_natureOfContents_ss 007text01material-008book24nature >> ungvary-counts.csv
 echo "12/12) 007 00 t 01 versus 008 33"
 php collocations-count.php 007text01_PhysicalDescription_specificMaterialDesignation_ss 008book33_GeneralInformation_literaryForm_ss 007text01material-008book33lit >> ungvary-counts.csv
+echo "13/13) térkép, 007/01=a 01 versus térkép, fizikai hordozó, 007/04"
+php collocations-count.php 007map01_PhysicalDescription_specificMaterialDesignation_ss 007map04_PhysicalDescription_physicalMedium_ss 007map01material-007map04medium >> ungvary-counts.csv
 
 echo DONE

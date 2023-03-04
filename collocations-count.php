@@ -4,9 +4,8 @@ define('LN', "\n");
 $catalogue = $argv[1];
 
 $catalogues = [
-  # 'bnpl', 'bayern', 'ddb', 'dnb', 'kbr', 'libris', 'lnb', 'loc', 'mek', 'nfi', 'onb', 'uva', 'K10plus'
-  # 'bl'
-  'nkp', 'kb'
+  'bnpl', 'bayern', 'ddb', 'dnb', 'kbr', 'libris', 'lnb', 'loc', 'mek', 'nfi', 'onb', 'uva', 'K10plus', 'nli', 'firenze',
+  'bl', 'nkp', 'kb'
 ];
 
 $fields = [];

@@ -14,26 +14,32 @@ fields <- tribble(
   '008book18_GeneralInformation_illustrations_ss', 'illustration (books, 008/18–21)', 'illusztráltság (könyvek, 008/18–21)', 'Illustration (books)', 'Illusztráltság (könyvek)',
   '008book24_GeneralInformation_natureOfContents_ss', 'nature of contents (books, 008/24–27)', 'tartalmi jellemzők (könyvek, 008/24–27)', 'Nature of contents', 'Tartalmi jellemzők',
   '008book33_GeneralInformation_literaryForm_ss', 'literary form (books, 008/33)', 'műfaj (könyvek, 008/33)', 'Literary form', 'Műfaj',
+  '007map04_PhysicalDescription_physicalMedium_ss', 'physical medium (maps, 007/04)', 'fizikai hordozó (maps, 007/04)', 'Physical medium', 'Fizikai hordozó',
 )
-  
+
 libraries <- tribble(
-  ~catalogue, ~is_national, ~hungarian, ~english,
+  ~catalogue, ~is_national, ~hungarian, ~english, ~records,
   #--|--|--|--
-  'loc', TRUE, 'Kongresszusi Könyvtár', 'Library of Congress',
-  'dnb', TRUE, 'Német Nemzeti Könyvtár', 'German National Library',
-  'onb', TRUE, 'Osztrák Nemzeti Könyvtár', 'Austrian National Library',
-  'nfi', TRUE, 'Finn Nemzeti Könyvtár', 'Finish National Library',
-  'libris', TRUE, 'Svéd Nemzeti Könyvtár', 'Swedish National Library',
-  'bnpl', TRUE, 'Lengyel Nemzeti Könyvtár', 'Polish National Library',
-  'lnb', TRUE, 'Lett Nemzeti Könyvtár', 'Latvian National Library',
-  'kbr', TRUE, 'Belga Nemzeti Könyvtár', 'Belgian National Library',
-  'bl', TRUE, 'Brit Nemzeti Könyvtár', 'British Library',
-  'uva', FALSE, 'Amsterdami Egyetem', 'Uni Amsterdam',
-  'gent', FALSE, 'Genti Egyetem', 'Uni Gent',
-  'bayern', FALSE, 'B3Kat', 'B3Kat',
-  'K10plus', FALSE, 'K10plus', 'K10plus', 
-  'ddb', FALSE, 'Német Digitális Könyvtár', 'German Digital Library',
-  'mek', FALSE, 'MEK', 'Hungarian Electronic Library'
+  'loc', TRUE, 'Kongresszusi Könyvtár', 'Library of Congress', 13817649,
+  'dnb', TRUE, 'Német Nemzeti Könyvtár', 'German National Library', 19026644,
+  'onb', TRUE, 'Osztrák Nemzeti Könyvtár', 'Austrian National Library', 6871096,
+  'nfi', TRUE, 'Finn Nemzeti Könyvtár', 'Finish National Library', 1039112,
+  'libris', TRUE, 'Svéd Nemzeti Könyvtár', 'Swedish National Library', 6184724,
+  'bnpl', TRUE, 'Lengyel Nemzeti Könyvtár', 'Polish National Library', 5739588,
+#  'lnb', TRUE, 'Lett Nemzeti Könyvtár', 'Latvian National Library', 11387,
+  'kbr', TRUE, 'Belga Nemzeti Könyvtár', 'Belgian National Library', 4476570,
+  'bl', TRUE, 'Brit Nemzeti Könyvtár', 'British Library', 19154445,
+  'uva', FALSE, 'Amsterdami Egyetem', 'Uni Amsterdam', 2781273,
+  'gent', FALSE, 'Genti Egyetem', 'Uni Gent', 2167117,
+  'bayern', FALSE, 'B3Kat', 'B3Kat', 29531640,
+  'K10plus', FALSE, 'K10plus', 'K10plus', 67230234,
+  'ddb', FALSE, 'Német Digitális Könyvtár', 'German Digital Library', 1287808,
+  'mek', FALSE, 'MEK', 'Hungarian Electronic Library', 21539,
+  'nli', TRUE, 'Izraeli Nemzeti Könyvtár', 'National Library of Israel', 1893965,
+#  'firenze', TRUE, 'Olasz közös katalógus', 'Italian union catalogue', 6288246
+  'kb', TRUE, 'Holland Nemzeti Könyvtár', 'National Library of The Netherlands', 5387123,
+  'nkp', TRUE, 'Cseh Nemzeti Könyvtár', 'National Library of Czech Republic', 1192536,
+  'oszk', TRUE, 'Országos Széchényi Könyvtár', 'National Széchényi Library', 2347479,
 )
 # add gent, uva, bl
 
@@ -49,13 +55,17 @@ code_ldr06 <- tribble(
   'Projected medium', 'g – Projected medium', 'g – audiovizuális anyag',
   'Nonmusical sound recording', 'i – Nonmusical sound recording', 'i – nem zenei hangzó anyag',
   'Musical sound recording', 'j – Musical sound recording', 'j – zenei hangzó anyag',
-  'Two-dimensional nonprojectable graphic', 'k – Two-dimensional nonprojectable graphic', 'k – két dimenziós (nem kivetíthető) ábrázolások',
+  # 'Two-dimensional nonprojectable graphic', 'k – Two-dimensional nonprojectable graphic', 'k – két dimenziós (nem kivetíthető) ábrázolások',
+  'Two-dimensional nonprojectable graphic', 'k – Two-dimensional ...', 'k – két dimenziós ...',
   # '', 'l – ', 'számítógépes anyag',
-  'Computer file', 'm – Computer file', 'm – számítógép által kezelt állomány',
+  # 'Computer file', 'm – Computer file', 'm – számítógép által kezelt állomány',
+  'Computer file', 'm – Computer file', 'm – számítógépes állomány',
   # '', 'n – ', 'n – különleges oktató anyag',
-  'Kit', 'o – Kit', 'o – vegyes dokumentum csomag, készlet',
+  # 'Kit', 'o – Kit', 'o – vegyes dokumentum csomag, készlet',
+  'Kit', 'o – Kit', 'o – készlet',
   'Mixed materials', 'p – Mixed materials', 'p – vegyes anyag',
-  'Three-dimensional artifact or naturally occurring object', 'r – Three-dimensional artifact or naturally occurring object', 'r – három dimenziós alkotások és természetes anyagok',
+  # 'Three-dimensional artifact or naturally occurring object', 'r – Three-dimensional artifact or naturally occurring object', 'r – három dimenziós alkotások és természetes anyagok',
+  'Three-dimensional artifact or naturally occurring object', 'r – Three-dimensional ...', 'r – három dimenziós ...',
   'Manuscript language material', 't – Manuscript language material', 't – kéziratos nyelvi anyag',
   '[invalid]', '[invalid]', '[érvénytelen]'
 )
@@ -70,7 +80,7 @@ code_ldr07 <- tribble(
   'Integrating resource', 'i – Integrating resource', 'i – integrált forrás',
   'Monograph/Item', 'm – Monograph/Item', 'm – monografikus mint egység',
   'Serial', 's – Serial', 's – összefoglaló (időszaki)',
-  '[invalid]', '    [invalid]', '    [érvénytelen]'
+  '[invalid]', '[invalid]', '[érvénytelen]'
 )
 
 code_ldr17 <- tribble(
@@ -86,7 +96,7 @@ code_ldr17 <- tribble(
   'Prepublication level', '8 – Prepublication level', '8 – előzetes',
   'Unknown', 'u – Unknown', 'u – ismeretlen',
   'Not applicable', 'z – Not applicable', 'z – nincs',
-  '[invalid]', '    [invalid]', '    [érvénytelen]'
+  '[invalid]', '[invalid]', '[érvénytelen]'
 )
 
 code_00700 <- tribble(
@@ -107,7 +117,7 @@ code_00700 <- tribble(
   'Text', 't – Text', 't – szöveg',
   'Videorecording', 'v – Videorecording', 'v – videofelvétel',
   'Unspecified', 'z – Unspecified', 'z – meghatározatlan',
-  '[invalid]', '    [invalid]', '    [érvénytelen]'
+  '[invalid]', '[invalid]', '[érvénytelen]'
 )
 
 code_007map01 <- tribble(
@@ -124,7 +134,36 @@ code_007map01 <- tribble(
   'View', 'y – View', 'y – látkép',
   'Other', 'z – Other', 'z – egyéb',
   'No attempt to code', '| – No attempt to code', '| – kódolatlan',
-  '[invalid]', '    [invalid]', '    [érvénytelen]'
+  '[invalid]', '[invalid]', '[érvénytelen]'
+)
+
+code_007map04 <- tribble(
+  ~solr, ~english, ~hungarian,
+  #--|--|--
+  'Paper', 'a – Paper', 'a – papír',
+  'Wood', 'b – Wood', 'b – fa',
+  'Stone', 'c – Stone', 'c – kő',
+  'Metal', 'd – Metal', 'd – fém',
+  'Synthetic', 'e – Synthetic', 'e – műanyag',
+  'Skin', 'f – Skin', 'f – bőr',
+  'Textiles', 'g – Textiles', 'g – textil',
+  'Plastic', 'i – Plastic', 'i – műanyag',
+  'Glass', 'j – Glass', 'j – üveg',
+  'Vinyl', 'l – Vinyl', 'l – vinil',
+  'Vellum', 'n – Vellum', 'n – borjúbőr pergament',
+  'Plaster', 'p – Plaster', 'p – gipsz',
+  'Flexible base photographic, positive', 'q – Flexible base photographic, positive', 'q – flexibilis alapú fotográfiai médium, pozitív',
+  'Flexible base photographic, negative', 'r – Flexible base photographic, negative', 'r – flexibilis alapú fotográfiai médium, negatív',
+  'Non-flexible base photographic, positive', 's – Non-flexible base photographic, positive', 's – nem flexibilis alapú fotográfiai médium, pozitív',
+  'Non-flexible base photographic, negative', 't – Non-flexible base photographic, negative', 't – nem flexibilis alapú fotográfiai médium, negatív',
+  'Unknown', 'u – Unknown', 'u – ismeretlen',
+  'Leather', 'v – Leather', 'v – bőr',
+  'Parchment', 'w – Parchment', 'w – peragment',
+  'Not Applicable', 'x – Not Applicable', 'x – nem alkalmazható',
+  'Other photographic medium', 'y – Other photographic medium', 'y – egyéb fotográfiai médium',
+  'Other', 'z – Other', 'z – egyéb',
+  'No attempt to code', '| – No attempt to code', '| – kódolatlan',
+  '[invalid]', '[invalid]', '[érvénytelen]'
 )
 
 code_007text01 <- tribble(
@@ -137,7 +176,7 @@ code_007text01 <- tribble(
   'Unspecified', 'u – Unspecified', 'u – ismeretlen',
   'Other', 'z – Other', 'z – egyéb',
   'No attempt to code', '| – No attempt to code', '| – kódolatlan',
-  '[invalid]', '    [invalid]', '    [érvénytelen]'
+  '[invalid]', '[invalid]', '[érvénytelen]'
 )
 
 code_00818 <- tribble(
@@ -162,7 +201,7 @@ code_00818 <- tribble(
   # r	színes illusztráció
   # s	művészi borító
   'No attempt to code', '| – No attempt to code', '| – kódolatlan',
-  '[invalid]', '    [invalid]', '    [érvénytelen]'
+  '[invalid]', '[invalid]', '[érvénytelen]'
 )
 
 code_00824 <- tribble(
@@ -197,7 +236,7 @@ code_00824 <- tribble(
   'Calendars', '5 – Calendars', '5 – naptár',
   'Comics/graphic novels', '6 – Comics/graphic novels', '6 – képregény',
   'No attempt to code', '| - No attempt to code', '| – kódolatlan',
-  '[invalid]', '    [invalid]', '    [érvénytelen]'
+  '[invalid]', '[invalid]', '[érvénytelen]'
 )
 
 code_00833 <- tribble(
@@ -236,6 +275,7 @@ comparisions <- tribble(
   '007text01material-008book18ill', '007text01_PhysicalDescription_specificMaterialDesignation_ss', '008book18_GeneralInformation_illustrations_ss',
   '007text01material-008book24nature', '007text01_PhysicalDescription_specificMaterialDesignation_ss', '008book24_GeneralInformation_natureOfContents_ss',
   '007text01material-008book33lit', '007text01_PhysicalDescription_specificMaterialDesignation_ss', '008book33_GeneralInformation_literaryForm_ss',
+  '007map01material-007map04medium', '007map01_PhysicalDescription_specificMaterialDesignation_ss', '007map04_PhysicalDescription_physicalMedium_ss'
 )
 
 configuration <- list(
@@ -250,7 +290,8 @@ configuration <- list(
   list(prefix = '007map01material-008book18ill', codeA = code_007map01, codeB = code_00818),
   list(prefix = '007text01material-008book18ill', codeA = code_007text01, codeB = code_00818),
   list(prefix = '007text01material-008book24nature', codeA = code_007text01, codeB = code_00824),
-  list(prefix = '007text01material-008book33lit', codeA = code_007text01, codeB = code_00833)
+  list(prefix = '007text01material-008book33lit', codeA = code_007text01, codeB = code_00833),
+  list(prefix = '007map01material-007map04medium', codeA = code_007map01, codeB = code_007map04)
 )
 
 replacement <- tribble(
