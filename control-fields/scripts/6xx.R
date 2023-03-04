@@ -7,6 +7,7 @@ if (length(args) != 2) {
   stop("You should give two arguments: the QA catalogue's output directory, and the library names (comma separated).", call.=FALSE)
 } else if (length(args) == 1) {
   # default output file
+  print(args)
   output_dir <- args[1]
   names <- unlist(strsplit(args[2], ','))
 }
