@@ -1,10 +1,10 @@
 library(tidyverse)
-output_dir <- '/home/kiru/Documents/marc21/_output'
-names <- c('oszk', 'nkp', 'kbr')
+# output_dir <- '/home/kiru/Documents/marc21/_output'
+# names <- c('oszk', 'nkp', 'kbr')
 
 args = commandArgs(trailingOnly=TRUE)
 if (length(args) != 2) {
-  stop("You should give two arguments: the QA catalogue's output directory, and the library names.n", call.=FALSE)
+  stop("You should give two arguments: the QA catalogue's output directory, and the library names (comma separated).", call.=FALSE)
 } else if (length(args) == 1) {
   # default output file
   output_dir <- args[1]
