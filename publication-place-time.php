@@ -4,8 +4,8 @@ $catalogue = $argv[1];
 
 // uva
 $catalogues = [ // 'bayern', 'uva'
-  // 'bnpl', 'bayern', 'ddb', 'loc', 'nfi', 'onb', 'uva', 'libris'
-  'bnpl'
+  // 'bnpl', 'bayern', 'ddb', 'loc', 'nfi', 'onb', 'uva', 'libris', 'bnpl', 'nkp',
+  'oszk'
 ];
 
 $fields = [
