@@ -2,10 +2,22 @@ library(tidyverse)
 # output_dir <- '/home/kiru/Documents/marc21/_output'
 # names <- c('oszk', 'nkp', 'kbr')
 
+readCatalogue <- function(name) {
+  df <- read_csv(sprintf('%s/%s/marc-elements.csv', output_dir, name))
+  
+  counts <- df %>% 
+    filter(documenttype == 'all') %>% 
+    filter(path %in% interestingPaths) %>% 
+    select(path, 'number-of-record') %>% 
+    mutate(catalog = name)
+  
+  return(counts)  
+}
+
 args = commandArgs(trailingOnly=TRUE)
 if (length(args) != 2) {
   stop("You should give two arguments: the QA catalogue's output directory, and the library names (comma separated).", call.=FALSE)
-} else if (length(args) == 1) {
+} else {
   # default output file
   print(args)
   output_dir <- args[1]
@@ -26,14 +38,3 @@ for (name in names) {
 df <- df %>% filter(catalog != 'dummy')
 view(df)
 
-readCatalogue <- function(name) {
-  df <- read_csv(sprintf('%s/%s/marc-elements.csv', output_dir, name))
-  
-  counts <- df %>% 
-    filter(documenttype == 'all') %>% 
-    filter(path %in% interestingPaths) %>% 
-    select(path, 'number-of-record') %>% 
-    mutate(catalog = name)
-
-  return(counts)  
-}
