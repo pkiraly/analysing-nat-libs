@@ -36,5 +36,5 @@ for (i in 1:length(names)) {
 }
 
 df <- df %>% filter(catalog != 'dummy')
-view(df)
+write_csv(df, 'data_raw/6xx.csv')
 
