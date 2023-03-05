@@ -24,16 +24,16 @@ if (length(args) != 4) {
   print(args)
   output_dir <- args[1]
   names <- unlist(strsplit(args[2], ','))
-  path <- args[3]
+  field <- args[3]
   output_file <- args[4]
 }
 
 df <- tibble(path = '0', 'number-of-record' = 0, catalog = 'dummy')
 
 for (i in 1:length(names)) {
-  df <- union(df, readCatalogue(names[i]))
+  df <- union(df, readCatalogue(names[i], field))
 }
 
 df <- df %>% filter(catalog != 'dummy')
-write_csv(df, 'data_raw/6xx.csv')
+write_csv(df, output_file) # 'data_raw/6xx.csv'
 
