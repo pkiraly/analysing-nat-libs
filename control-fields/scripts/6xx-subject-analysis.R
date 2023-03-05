@@ -110,7 +110,7 @@ stat %>%
       # color = percent
     )
   )+
-  geom_point() +
+  geom_point(color='maroon') +
   labs(
     title = title,
     subtitle = subtitle,
