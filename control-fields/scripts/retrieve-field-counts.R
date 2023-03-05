@@ -3,7 +3,8 @@ library(tidyverse)
 # names <- c('oszk', 'nkp', 'kbr')
 
 readCatalogue <- function(name, path) {
-  df <- read_csv(sprintf('%s/%s/marc-elements.csv', output_dir, name))
+  df <- read_csv(sprintf('%s/%s/marc-elements.csv', output_dir, name),
+                 show_col_types = FALSE)
   
   subfields_pattern <- paste0(path, '\\$')
   
